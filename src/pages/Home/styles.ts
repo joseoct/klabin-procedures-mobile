@@ -1,5 +1,12 @@
 import styled from 'styled-components/native';
 
-export const First = styled.Text`
-  font-size: 32px;
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+`;
+
+export const Logo = styled.Image`
+  margin-bottom: 64px;
 `;
