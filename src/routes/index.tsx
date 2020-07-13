@@ -10,12 +10,28 @@ const Routes: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
-        cardStyle: { backgroundColor: '#312e38' },
+        headerTitleStyle: {
+          fontFamily: 'RobotoSlab-Medium',
+        },
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+          cardStyle: { backgroundColor: '#312e38' },
+        }}
+      />
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          headerStyle: { backgroundColor: '#009e59' },
+          headerTintColor: '#fff',
+          cardStyle: { backgroundColor: '#312e38' },
+        }}
+      />
     </Stack.Navigator>
   );
 };
