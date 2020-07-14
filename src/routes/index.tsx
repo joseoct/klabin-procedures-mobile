@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../pages/Home';
-import Dashboard from '../pages/Dashboard';
+import Subareas from '../pages/Subareas';
+import Procedures from '../pages/Procedures';
 
 const Stack = createStackNavigator();
 
@@ -24,8 +25,17 @@ const Routes: React.FC = () => {
         }}
       />
       <Stack.Screen
-        name="Dashboard"
-        component={Dashboard}
+        name="Subareas"
+        component={Subareas}
+        options={{
+          headerStyle: { backgroundColor: '#009e59' },
+          headerTintColor: '#fff',
+          cardStyle: { backgroundColor: '#312e38' },
+        }}
+      />
+      <Stack.Screen
+        name="Procedures"
+        component={Procedures}
         options={{
           headerStyle: { backgroundColor: '#009e59' },
           headerTintColor: '#fff',

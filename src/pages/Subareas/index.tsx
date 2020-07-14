@@ -1,13 +1,16 @@
-import React from 'react';
-import { SafeAreaView, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
 import { useAxios } from '../../hooks/useAxios';
 
+import SearchInput from '../../components/SearchInput';
+
 import {
+  SearchView,
   SubareaContainer,
   SubareaDetail,
   SubareaList,
-  SubareasListTitle,
 } from './styles';
 
 export interface Subarea {
@@ -19,17 +22,31 @@ export interface Subarea {
   observations: string;
 }
 
-const Home: React.FC = () => {
+const Subareas: React.FC = () => {
   const { data: subareas } = useAxios<Subarea[]>('subareas');
+
+  const [searchValue, setSearchValue] = useState('');
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
       <SubareaList
         data={subareas}
         keyExtractor={subarea => subarea.id}
-        ListHeaderComponent={<SubareasListTitle>Subareas</SubareasListTitle>}
+        // eslint-disable-next-line prettier/prettier
+        ListHeaderComponent={(
+          <SearchView>
+            <SearchInput
+              value={searchValue}
+              onChangeText={setSearchValue}
+              placeholder="Qual subárea você procura?"
+            />
+          </SearchView>
+          // eslint-disable-next-line prettier/prettier
+        )}
         renderItem={({ item: subarea }) => (
-          <SubareaContainer>
+          <SubareaContainer onPress={() => navigation.navigate('Procedures')}>
             <SubareaDetail>{subarea.tag}</SubareaDetail>
             <SubareaDetail>{subarea.name}</SubareaDetail>
             <SubareaDetail>{subarea.sector}</SubareaDetail>
@@ -42,4 +59,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Subareas;

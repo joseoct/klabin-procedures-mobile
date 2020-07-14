@@ -21,18 +21,22 @@ export const SubareaList = styled(
   padding: 16px;
 `;
 
-export const SubareasListTitle = styled.Text`
-  font-size: 24px;
+// export const SubareasListTitle = styled.Text`
+//   font-size: 24px;
+//   margin-bottom: 16px;
+//   color: #f4ede8;
+//   font-family: 'RobotoSlab-Medium';
+// `;
+
+export const SearchView = styled(RectButton)`
   margin-bottom: 16px;
-  color: #f4ede8;
-  font-family: 'RobotoSlab-Medium';
 `;
 
 export const SubareaContainer = styled(RectButton)`
   background: #3e3b47;
   border-radius: 10px;
   padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   flex-direction: row;
   align-items: center;
   flex-direction: column;
@@ -40,4 +44,5 @@ export const SubareaContainer = styled(RectButton)`
 
 export const SubareaDetail = styled.Text`
   color: #fff;
+  font-family: 'RobotoSlab-Regular';
 `;

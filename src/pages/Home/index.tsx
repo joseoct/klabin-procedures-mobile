@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/logo.png';
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     <Container>
       <Logo source={logo} />
 
-      <Button onPress={() => navigation.navigate('Dashboard')}>Entrar</Button>
+      <Button onPress={() => navigation.navigate('Subareas')}>Entrar</Button>
     </Container>
   );
 };
