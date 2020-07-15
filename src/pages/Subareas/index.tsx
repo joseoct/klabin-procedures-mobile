@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { RadioButton } from 'react-native-paper';
 import { useAxios } from '../../hooks/useAxios';
 
 import SearchInput from '../../components/SearchInput';
@@ -11,6 +12,12 @@ import {
   SubareaContainer,
   SubareaDetail,
   SubareaList,
+  RadioButtonView,
+  RadioText,
+  TagView,
+  TagText,
+  LocalView,
+  LocalText,
 } from './styles';
 
 export interface Subarea {
@@ -25,6 +32,7 @@ export interface Subarea {
 const Subareas: React.FC = () => {
   const { data: subareas } = useAxios<Subarea[]>('subareas');
 
+  const [checked, setChecked] = useState('tag');
   const [searchValue, setSearchValue] = useState('');
 
   const navigation = useNavigation();
@@ -37,6 +45,26 @@ const Subareas: React.FC = () => {
         // eslint-disable-next-line prettier/prettier
         ListHeaderComponent={(
           <SearchView>
+            <RadioButtonView>
+              <RadioText>Pesquisar por:</RadioText>
+              <TagView>
+                <TagText>Tag</TagText>
+                <RadioButton
+                  value="tag"
+                  status={checked === 'tag' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('tag')}
+                />
+              </TagView>
+
+              <LocalView>
+                <LocalText>Local</LocalText>
+                <RadioButton
+                  value="local"
+                  status={checked === 'local' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('local')}
+                />
+              </LocalView>
+            </RadioButtonView>
             <SearchInput
               value={searchValue}
               onChangeText={setSearchValue}

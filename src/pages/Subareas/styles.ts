@@ -27,8 +27,41 @@ export const SubareaList = styled(
 //   color: #f4ede8;
 //   font-family: 'RobotoSlab-Medium';
 // `;
+export const RadioButtonView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-export const SearchView = styled(RectButton)`
+export const RadioText = styled.Text`
+  font-family: 'RobotoSlab-Regular';
+  font-size: 16px;
+  color: #f0f0f5;
+`;
+
+export const TagView = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TagText = styled.Text`
+  font-family: 'RobotoSlab-Regular';
+  font-size: 16px;
+  color: #f0f0f5;
+`;
+
+export const LocalView = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const LocalText = styled.Text`
+  font-family: 'RobotoSlab-Regular';
+  font-size: 16px;
+  color: #f0f0f5;
+`;
+
+export const SearchView = styled.View`
   margin-bottom: 16px;
 `;
 

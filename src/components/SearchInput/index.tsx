@@ -35,7 +35,6 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
-        testID="search-input"
         {...rest}
       />
     </Container>
