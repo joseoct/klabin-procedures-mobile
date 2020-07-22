@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { SafeAreaView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -57,6 +57,15 @@ const Subareas: React.FC = () => {
     setSearchValue('');
   }, [searchFor]);
 
+  const handleNavigateToProcedures = useCallback(
+    (subarea_id: string) => {
+      navigation.navigate('Procedures', {
+        subarea_id,
+      });
+    },
+    [navigation],
+  );
+
   return (
     <SafeAreaView>
       <SubareaList
@@ -94,7 +103,9 @@ const Subareas: React.FC = () => {
           // eslint-disable-next-line prettier/prettier
         )}
         renderItem={({ item: subarea }) => (
-          <SubareaContainer onPress={() => navigation.navigate('Procedures')}>
+          <SubareaContainer
+            onPress={() => handleNavigateToProcedures(subarea.id)}
+          >
             <SubareaDetail>{subarea.tag}</SubareaDetail>
             <SubareaDetail>{subarea.name}</SubareaDetail>
             <SubareaDetail>{subarea.sector}</SubareaDetail>
