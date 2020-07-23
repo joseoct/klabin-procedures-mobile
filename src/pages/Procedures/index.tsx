@@ -3,7 +3,14 @@ import { useRoute } from '@react-navigation/native';
 
 import { SafeAreaView } from 'react-native';
 import { useAxios } from '../../hooks/useAxios';
-import { ProcedureContainer, ProcedureDetail, ProcedureList } from './styles';
+import {
+  ProcedureContainer,
+  ProcedureDetail,
+  ProcedureList,
+  ProcedureDetails,
+  ProcedureIndexView,
+  ProcedureIndexText,
+} from './styles';
 
 interface RouteParams {
   subarea_id: string;
@@ -11,12 +18,13 @@ interface RouteParams {
 
 export interface Procedure {
   id: string;
+  index: string;
   description: string;
   observations: string;
   local: string;
   tag: string;
   font: string;
-  procedure_image: string;
+  procedure_image_url: string;
 }
 
 const Procedures: React.FC = () => {
@@ -36,12 +44,13 @@ const Procedures: React.FC = () => {
         // eslint-disable-next-line prettier/prettier
         renderItem={({ item: procedure }) => (
           <ProcedureContainer>
-            <ProcedureDetail>{procedure.tag}</ProcedureDetail>
-            <ProcedureDetail>{procedure.description}</ProcedureDetail>
-            <ProcedureDetail>{procedure.font}</ProcedureDetail>
-            <ProcedureDetail>{procedure.local}</ProcedureDetail>
-            <ProcedureDetail>{procedure.observations}</ProcedureDetail>
-            <ProcedureDetail>{procedure.procedure_image}</ProcedureDetail>
+            <ProcedureIndexView fontColor={procedure.font}>
+              <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
+            </ProcedureIndexView>
+            <ProcedureDetails>
+              <ProcedureDetail>{procedure.tag}</ProcedureDetail>
+              <ProcedureDetail>{procedure.local}</ProcedureDetail>
+            </ProcedureDetails>
           </ProcedureContainer>
         )}
       />

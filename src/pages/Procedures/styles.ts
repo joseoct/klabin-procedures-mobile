@@ -1,7 +1,11 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Procedure } from './index';
+
+interface ProcedureFontColorProps {
+  fontColor: string;
+}
 
 export const ProcedureViewTitle = styled.View`
   align-items: center;
@@ -72,10 +76,61 @@ export const ProcedureContainer = styled(RectButton)`
   margin-bottom: 8px;
   flex-direction: row;
   align-items: center;
-  flex-direction: column;
+`;
+
+export const ProcedureIndexView = styled.View<ProcedureFontColorProps>`
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+
+  ${props => {
+    switch (props.fontColor) {
+      case 'Massa':
+        return css`
+          background: #8b4513;
+        `;
+      case 'Química':
+        return css`
+          background: #7fffd4;
+        `;
+      case 'Pneumática':
+        return css`
+          background: #00bfff;
+        `;
+      case 'Elétrica':
+        return css`
+          background: #b5171b;
+        `;
+      case 'Água':
+        return css`
+          background: #18b41b;
+        `;
+      case 'Mecânica':
+        return css`
+          background: #4f4e52;
+        `;
+
+      default:
+        return css`
+          background: #3e3b47;
+        `;
+    }
+  }}
+`;
+
+export const ProcedureIndexText = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  font-size: 18px;
+`;
+
+export const ProcedureDetails = styled.View`
+  margin-left: 16px;
 `;
 
 export const ProcedureDetail = styled.Text`
   color: #fff;
   font-family: 'RobotoSlab-Regular';
+  margin: 4px;
 `;
