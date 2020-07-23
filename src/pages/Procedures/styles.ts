@@ -3,17 +3,17 @@ import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Procedure } from './index';
 
-export const SubareaViewTitle = styled.View`
+export const ProcedureViewTitle = styled.View`
   align-items: center;
 `;
 
-export const SubareaTextTitle = styled.Text`
+export const ProcedureTextTitle = styled.Text`
   font-size: 32px;
   color: #fff;
   font-family: 'RobotoSlab-Medium';
 `;
 
-export const SubareaList = styled(
+export const ProcedureList = styled(
   FlatList as new () => FlatList<Procedure>,
 ).attrs({
   showsVerticalScrollIndicator: false,
@@ -21,7 +21,7 @@ export const SubareaList = styled(
   padding: 16px;
 `;
 
-// export const SubareasListTitle = styled.Text`
+// export const ProceduresListTitle = styled.Text`
 //   font-size: 24px;
 //   margin-bottom: 16px;
 //   color: #f4ede8;
@@ -65,7 +65,7 @@ export const SearchView = styled.View`
   margin-bottom: 16px;
 `;
 
-export const SubareaContainer = styled(RectButton)`
+export const ProcedureContainer = styled(RectButton)`
   background: #3e3b47;
   border-radius: 10px;
   padding: 20px;
@@ -75,7 +75,7 @@ export const SubareaContainer = styled(RectButton)`
   flex-direction: column;
 `;
 
-export const SubareaDetail = styled.Text`
+export const ProcedureDetail = styled.Text`
   color: #fff;
   font-family: 'RobotoSlab-Regular';
 `;

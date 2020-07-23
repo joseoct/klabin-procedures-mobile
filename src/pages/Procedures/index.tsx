@@ -3,7 +3,7 @@ import { useRoute } from '@react-navigation/native';
 
 import { SafeAreaView } from 'react-native';
 import { useAxios } from '../../hooks/useAxios';
-import { SubareaContainer, SubareaDetail, SubareaList } from './styles';
+import { ProcedureContainer, ProcedureDetail, ProcedureList } from './styles';
 
 interface RouteParams {
   subarea_id: string;
@@ -30,19 +30,19 @@ const Procedures: React.FC = () => {
 
   return (
     <SafeAreaView>
-      <SubareaList
+      <ProcedureList
         data={procedures}
         keyExtractor={procedure => procedure.id}
         // eslint-disable-next-line prettier/prettier
         renderItem={({ item: procedure }) => (
-          <SubareaContainer>
-            <SubareaDetail>{procedure.tag}</SubareaDetail>
-            <SubareaDetail>{procedure.description}</SubareaDetail>
-            <SubareaDetail>{procedure.font}</SubareaDetail>
-            <SubareaDetail>{procedure.local}</SubareaDetail>
-            <SubareaDetail>{procedure.observations}</SubareaDetail>
-            <SubareaDetail>{procedure.procedure_image}</SubareaDetail>
-          </SubareaContainer>
+          <ProcedureContainer>
+            <ProcedureDetail>{procedure.tag}</ProcedureDetail>
+            <ProcedureDetail>{procedure.description}</ProcedureDetail>
+            <ProcedureDetail>{procedure.font}</ProcedureDetail>
+            <ProcedureDetail>{procedure.local}</ProcedureDetail>
+            <ProcedureDetail>{procedure.observations}</ProcedureDetail>
+            <ProcedureDetail>{procedure.procedure_image}</ProcedureDetail>
+          </ProcedureContainer>
         )}
       />
     </SafeAreaView>
