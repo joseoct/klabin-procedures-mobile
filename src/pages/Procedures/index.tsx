@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
+import { FAB } from 'react-native-paper';
 
 import { SafeAreaView } from 'react-native';
 import { useAxios } from '../../hooks/useAxios';
@@ -37,24 +38,33 @@ const Procedures: React.FC = () => {
   );
 
   return (
-    <SafeAreaView>
-      <ProcedureList
-        data={procedures}
-        keyExtractor={procedure => procedure.id}
-        // eslint-disable-next-line prettier/prettier
-        renderItem={({ item: procedure }) => (
-          <ProcedureContainer>
-            <ProcedureIndexView fontColor={procedure.font}>
-              <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
-            </ProcedureIndexView>
-            <ProcedureDetails>
-              <ProcedureDetail>{procedure.tag}</ProcedureDetail>
-              <ProcedureDetail>{procedure.local}</ProcedureDetail>
-            </ProcedureDetails>
-          </ProcedureContainer>
-        )}
+    <>
+      <SafeAreaView>
+        <ProcedureList
+          data={procedures}
+          keyExtractor={procedure => procedure.id}
+          // eslint-disable-next-line prettier/prettier
+          renderItem={({ item: procedure }) => (
+            <ProcedureContainer>
+              <ProcedureIndexView fontColor={procedure.font}>
+                <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
+              </ProcedureIndexView>
+              <ProcedureDetails>
+                <ProcedureDetail>{procedure.tag}</ProcedureDetail>
+                <ProcedureDetail>{procedure.local}</ProcedureDetail>
+              </ProcedureDetails>
+            </ProcedureContainer>
+          )}
+        />
+      </SafeAreaView>
+
+      <FAB
+        style={{ position: 'absolute', margin: 16, right: 0, bottom: 0 }}
+        accessibilityStates
+        icon="plus"
+        onPress={() => console.log('Pressed')}
       />
-    </SafeAreaView>
+    </>
   );
 };
 
