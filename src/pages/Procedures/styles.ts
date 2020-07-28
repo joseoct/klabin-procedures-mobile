@@ -134,3 +134,18 @@ export const ProcedureDetail = styled.Text`
   font-family: 'RobotoSlab-Regular';
   margin: 4px;
 `;
+
+export const FabButtonView = styled(RectButton)`
+  width: 60px;
+  height: 60px;
+  background: #009e59;
+  border-radius: 96px;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FabButtonText = styled.Text``;

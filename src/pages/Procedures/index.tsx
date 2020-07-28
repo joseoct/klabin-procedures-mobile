@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
-import { FAB } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { SafeAreaView } from 'react-native';
 import { useAxios } from '../../hooks/useAxios';
@@ -11,6 +11,8 @@ import {
   ProcedureDetails,
   ProcedureIndexView,
   ProcedureIndexText,
+  FabButtonView,
+  FabButtonText,
 } from './styles';
 
 interface RouteParams {
@@ -58,12 +60,11 @@ const Procedures: React.FC = () => {
         />
       </SafeAreaView>
 
-      <FAB
-        style={{ position: 'absolute', margin: 16, right: 0, bottom: 0 }}
-        accessibilityStates
-        icon="plus"
-        onPress={() => console.log('Pressed')}
-      />
+      <FabButtonView>
+        <FabButtonText>
+          <Icon name="plus" size={30} color="#fff" />
+        </FabButtonText>
+      </FabButtonView>
     </>
   );
 };
