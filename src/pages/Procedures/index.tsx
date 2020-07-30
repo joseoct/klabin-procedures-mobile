@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRoute } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { SafeAreaView } from 'react-native';
@@ -11,7 +11,7 @@ import {
   ProcedureDetails,
   ProcedureIndexView,
   ProcedureIndexText,
-  FabButtonView,
+  FabButton,
   FabButtonText,
 } from './styles';
 
@@ -32,12 +32,17 @@ export interface Procedure {
 
 const Procedures: React.FC = () => {
   const route = useRoute();
+  const navigation = useNavigation();
 
   const { subarea_id } = route.params as RouteParams;
 
   const { data: procedures } = useAxios<Procedure[]>(
     `subareas/${subarea_id}/procedures`,
   );
+
+  const handleCreateProcedure = useCallback(() => {
+    navigation.navigate('CreateProcedure');
+  }, [navigation]);
 
   return (
     <>
@@ -60,11 +65,11 @@ const Procedures: React.FC = () => {
         />
       </SafeAreaView>
 
-      <FabButtonView>
+      <FabButton onPress={handleCreateProcedure}>
         <FabButtonText>
           <Icon name="plus" size={30} color="#fff" />
         </FabButtonText>
-      </FabButtonView>
+      </FabButton>
     </>
   );
 };

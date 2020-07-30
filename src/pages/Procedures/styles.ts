@@ -135,7 +135,7 @@ export const ProcedureDetail = styled.Text`
   margin: 4px;
 `;
 
-export const FabButtonView = styled(RectButton)`
+export const FabButton = styled(RectButton)`
   width: 60px;
   height: 60px;
   background: #009e59;
