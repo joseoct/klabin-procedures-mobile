@@ -1,7 +1,6 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import Icon from 'react-native-vector-icons/Feather';
 
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -11,12 +10,20 @@ import Input from '../../components/Input';
 
 import { Container, Title } from './styles';
 
+interface NewProcedureFormData {
+  tag: string;
+  description: string;
+  local: string;
+  observations: string;
+  font: string;
+}
+
 const CreateProcedure: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [font, setFont] = useState<string>('uk');
+  const [font, setFont] = useState<string>('');
 
-  const handleSignIn = useCallback(() => {
-    console.log('oi');
+  const handleSignIn = useCallback((data: NewProcedureFormData) => {
+    console.log(data, font);
   }, []);
 
   return (
@@ -37,34 +44,27 @@ const CreateProcedure: React.FC = () => {
 
             <Form onSubmit={handleSignIn} ref={formRef}>
               <Input
+                name="tag"
+                placeholder="Tag"
+                onSubmitEditing={() => formRef.current?.submitForm()}
+              />
+
+              <Input
                 autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
                 name="description"
                 placeholder="Descrição"
                 returnKeyType="next"
               />
 
               <Input
-                name="observations"
-                placeholder="Observações"
-                secureTextEntry
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
-
-              <Input
                 name="local"
                 placeholder="Local"
-                secureTextEntry
-                returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
 
               <Input
-                name="tag"
-                placeholder="Tag"
-                secureTextEntry
+                name="observations"
+                placeholder="Observações"
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
@@ -72,20 +72,50 @@ const CreateProcedure: React.FC = () => {
               <DropDownPicker
                 items={[
                   {
-                    label: 'UK',
-                    value: 'uk',
+                    label: 'Massa',
+                    value: 'Massa',
                   },
                   {
-                    label: 'France',
-                    value: 'france',
+                    label: 'Química',
+                    value: 'Química',
+                  },
+                  {
+                    label: 'Pneumática',
+                    value: 'Pneumática',
+                  },
+                  {
+                    label: 'Elétrica',
+                    value: 'Elétrica',
+                  },
+                  {
+                    label: 'Água',
+                    value: 'Água',
+                  },
+                  {
+                    label: 'Mecânica',
+                    value: 'Mecânica',
                   },
                 ]}
                 defaultValue={font}
-                containerStyle={{ height: 60 }}
-                style={{ backgroundColor: '#22222b' }}
-                itemStyle={{
+                arrowColor="#f4f4f4"
+                containerStyle={{ height: 60, border: 'none' }}
+                style={{
+                  backgroundColor: '#22222b',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10,
+                }}
+                dropDownStyle={{ backgroundColor: '#22222b' }}
+                placeholder="Fonte"
+                placeholderStyle={{ color: '#666360' }}
+                labelStyle={{
+                  fontFamily: 'RobotoSlab-Regular',
+                  padding: 19,
+                  marginLeft: 8,
                   fontSize: 16,
-                  color: 'red',
+                  textAlign: 'left',
+                  color: '#f4f4f4',
                 }}
                 onChangeItem={item => setFont(item.value)}
               />
