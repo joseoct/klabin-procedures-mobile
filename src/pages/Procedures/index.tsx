@@ -58,7 +58,10 @@ const Procedures: React.FC = () => {
               </ProcedureIndexView>
               <ProcedureDetails>
                 <ProcedureDetail>{procedure.tag}</ProcedureDetail>
+                <ProcedureDetail>{procedure.description}</ProcedureDetail>
                 <ProcedureDetail>{procedure.local}</ProcedureDetail>
+                <ProcedureDetail>{procedure.font}</ProcedureDetail>
+                <ProcedureDetail>{procedure.observations}</ProcedureDetail>
               </ProcedureDetails>
             </ProcedureContainer>
           )}

@@ -12,7 +12,9 @@ import SearchInput from '../../components/SearchInput';
 import {
   SearchView,
   SubareaContainer,
+  SubareaDetails,
   SubareaDetail,
+  SubareaDetailText,
   SubareaList,
   RadioButtonView,
   RadioText,
@@ -106,11 +108,26 @@ const Subareas: React.FC = () => {
           <SubareaContainer
             onPress={() => handleNavigateToProcedures(subarea.id)}
           >
-            <SubareaDetail>{subarea.tag}</SubareaDetail>
-            <SubareaDetail>{subarea.name}</SubareaDetail>
-            <SubareaDetail>{subarea.sector}</SubareaDetail>
-            <SubareaDetail>{subarea.local}</SubareaDetail>
-            <SubareaDetail>{subarea.observations}</SubareaDetail>
+            <SubareaDetails>
+              <SubareaDetail>Tag </SubareaDetail>
+              <SubareaDetailText>{subarea.tag}</SubareaDetailText>
+            </SubareaDetails>
+            <SubareaDetails>
+              <SubareaDetail>Nome </SubareaDetail>
+              <SubareaDetailText>{subarea.name}</SubareaDetailText>
+            </SubareaDetails>
+            <SubareaDetails>
+              <SubareaDetail>Setor </SubareaDetail>
+              <SubareaDetailText>{subarea.sector}</SubareaDetailText>
+            </SubareaDetails>
+            <SubareaDetails>
+              <SubareaDetail>Local </SubareaDetail>
+              <SubareaDetailText>{subarea.local}</SubareaDetailText>
+            </SubareaDetails>
+            <SubareaDetails>
+              <SubareaDetail>Observações </SubareaDetail>
+              <SubareaDetailText>{subarea.observations}</SubareaDetailText>
+            </SubareaDetails>
           </SubareaContainer>
         )}
       />

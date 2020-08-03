@@ -8,7 +8,12 @@ import { FormHandles } from '@unform/core';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
-import { Container, Title } from './styles';
+import {
+  Container,
+  CameraButtonView,
+  CameraButton,
+  CreateButtonView,
+} from './styles';
 
 interface NewProcedureFormData {
   tag: string;
@@ -38,10 +43,6 @@ const CreateProcedure: React.FC = () => {
           contentContainerStyle={{ flex: 1 }}
         >
           <Container>
-            <View>
-              <Title>Criar procedimento</Title>
-            </View>
-
             <Form onSubmit={handleSignIn} ref={formRef}>
               <Input
                 name="tag"
@@ -120,11 +121,15 @@ const CreateProcedure: React.FC = () => {
                 onChangeItem={item => setFont(item.value)}
               />
 
-              <View>
+              <CameraButtonView>
+                <CameraButton icon="camera" />
+              </CameraButtonView>
+
+              <CreateButtonView>
                 <Button onPress={() => formRef.current?.submitForm()}>
-                  Criar
+                  Criar procedimento
                 </Button>
-              </View>
+              </CreateButtonView>
             </Form>
           </Container>
         </ScrollView>

@@ -71,11 +71,20 @@ export const SubareaContainer = styled(RectButton)`
   padding: 20px;
   margin-bottom: 8px;
   flex-direction: row;
-  align-items: center;
   flex-direction: column;
 `;
 
+export const SubareaDetails = styled.Text`
+  color: #fff;
+  font-family: 'RobotoSlab-Regular';
+`;
+
 export const SubareaDetail = styled.Text`
+  color: #00ff90;
+  font-family: 'RobotoSlab-Regular';
+`;
+
+export const SubareaDetailText = styled.Text`
   color: #fff;
   font-family: 'RobotoSlab-Regular';
 `;

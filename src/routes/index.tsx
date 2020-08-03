@@ -29,6 +29,7 @@ const Routes: React.FC = () => {
         name="Subareas"
         component={Subareas}
         options={{
+          headerTitle: 'Subáreas',
           headerStyle: { backgroundColor: '#009e59' },
           headerTintColor: '#fff',
           cardStyle: { backgroundColor: '#312e38' },
@@ -38,6 +39,7 @@ const Routes: React.FC = () => {
         name="Procedures"
         component={Procedures}
         options={{
+          headerTitle: 'Procedimentos',
           headerStyle: { backgroundColor: '#009e59' },
           headerTintColor: '#fff',
           cardStyle: { backgroundColor: '#312e38' },
@@ -47,6 +49,7 @@ const Routes: React.FC = () => {
         name="CreateProcedure"
         component={CreateProcedure}
         options={{
+          headerTitle: 'Criar procedimento',
           headerStyle: { backgroundColor: '#009e59' },
           headerTintColor: '#fff',
           cardStyle: { backgroundColor: '#312e38' },
