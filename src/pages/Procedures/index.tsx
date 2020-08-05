@@ -44,6 +44,16 @@ const Procedures: React.FC = () => {
     navigation.navigate('CreateProcedure');
   }, [navigation]);
 
+  const handleNavigateToProcedures = useCallback(
+    (procedure_image_url: string, observations: string) => {
+      navigation.navigate('ShowProcedure', {
+        procedure_image_url,
+        observations,
+      });
+    },
+    [navigation],
+  );
+
   return (
     <>
       <SafeAreaView>
@@ -52,7 +62,16 @@ const Procedures: React.FC = () => {
           keyExtractor={procedure => procedure.id}
           // eslint-disable-next-line prettier/prettier
           renderItem={({ item: procedure }) => (
-            <ProcedureContainer>
+            <ProcedureContainer
+              onPress={
+                () =>
+                  handleNavigateToProcedures(
+                    procedure.procedure_image_url,
+                    procedure.observations,
+                  )
+                // eslint-disable-next-line react/jsx-curly-newline
+              }
+            >
               <ProcedureIndexView fontColor={procedure.font}>
                 <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
               </ProcedureIndexView>

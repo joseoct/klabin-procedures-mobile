@@ -81,7 +81,7 @@ export const ProcedureContainer = styled(RectButton)`
 export const ProcedureIndexView = styled.View<ProcedureFontColorProps>`
   width: 48px;
   height: 48px;
-  border-radius: 10px;
+  border-radius: 24px;
   align-items: center;
   justify-content: center;
 
@@ -123,6 +123,7 @@ export const ProcedureIndexView = styled.View<ProcedureFontColorProps>`
 export const ProcedureIndexText = styled.Text`
   font-family: 'RobotoSlab-Medium';
   font-size: 18px;
+  color: #f4f4f4;
 `;
 
 export const ProcedureDetails = styled.View`

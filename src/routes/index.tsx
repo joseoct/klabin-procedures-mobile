@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Subareas from '../pages/Subareas';
 import Procedures from '../pages/Procedures';
 import CreateProcedure from '../pages/CreateProcedure';
+import ShowProcedure from '../pages/ShowProcedure';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,16 @@ const Routes: React.FC = () => {
         component={CreateProcedure}
         options={{
           headerTitle: 'Criar procedimento',
+          headerStyle: { backgroundColor: '#009e59' },
+          headerTintColor: '#fff',
+          cardStyle: { backgroundColor: '#312e38' },
+        }}
+      />
+      <Stack.Screen
+        name="ShowProcedure"
+        component={ShowProcedure}
+        options={{
+          headerTitle: 'Foto do procedimento',
           headerStyle: { backgroundColor: '#009e59' },
           headerTintColor: '#fff',
           cardStyle: { backgroundColor: '#312e38' },
