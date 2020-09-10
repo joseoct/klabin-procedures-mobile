@@ -41,8 +41,10 @@ const Procedures: React.FC = () => {
   );
 
   const handleCreateProcedure = useCallback(() => {
-    navigation.navigate('CreateProcedure');
-  }, [navigation]);
+    navigation.navigate('CreateProcedure', {
+      subarea_id,
+    });
+  }, [navigation, subarea_id]);
 
   const handleNavigateToProcedures = useCallback(
     (procedure_image_url: string, observations: string) => {
