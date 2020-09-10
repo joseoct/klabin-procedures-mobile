@@ -81,7 +81,7 @@ const CreateProcedure: React.FC = () => {
         uri: uriPhoto,
       });
 
-      api.post(`subareas/${subarea_id}`, formData).then(response => {
+      api.post(`subareas/${subarea_id}`, formData).then(() => {
         Alert.alert('Procedimento criado com sucesso');
         reset({
           routes: [
