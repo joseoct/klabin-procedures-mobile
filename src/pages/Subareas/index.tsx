@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SafeAreaView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
@@ -10,6 +9,9 @@ import api from '../../services/api';
 import SearchInput from '../../components/SearchInput';
 
 import {
+  Header,
+  UserName,
+  Welcome,
   SearchView,
   SubareaContainer,
   SubareaDetails,
@@ -69,7 +71,12 @@ const Subareas: React.FC = () => {
   );
 
   return (
-    <SafeAreaView>
+    <>
+      <Header>
+        <Welcome>Bem vindo,</Welcome>
+        <UserName>José</UserName>
+      </Header>
+
       <SubareaList
         data={subareas}
         keyExtractor={subarea => subarea.id}
@@ -131,7 +138,7 @@ const Subareas: React.FC = () => {
           </SubareaContainer>
         )}
       />
-    </SafeAreaView>
+    </>
   );
 };
 

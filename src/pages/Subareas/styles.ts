@@ -3,6 +3,30 @@ import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Subarea } from './index';
 
+export const Header = styled.View`
+  padding: 24px;
+  padding-top: 48px;
+  background: #009e59;
+
+  flex-direction: column;
+  justify-content: center;
+`;
+
+// Header.displayName = 'DashboardHeader';
+
+export const HeaderTitle = styled.Text``;
+
+export const Welcome = styled.Text`
+  color: #f4ede8;
+  font-size: 16px;
+`;
+
+export const UserName = styled.Text`
+  color: #f4ede8;
+  font-size: 26px;
+  font-family: 'RobotoSlab-Medium';
+`;
+
 export const SubareaViewTitle = styled.View`
   align-items: center;
 `;

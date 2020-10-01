@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { SafeAreaView } from 'react-native';
 import { useAxios } from '../../hooks/useAxios';
+
+import Header from '../../components/Header';
+
 import {
   ProcedureContainer,
   ProcedureDetail,
@@ -21,7 +24,7 @@ interface RouteParams {
 
 export interface Procedure {
   id: string;
-  index: string;
+  index: number;
   description: string;
   observations: string;
   local: string;
@@ -47,47 +50,50 @@ const Procedures: React.FC = () => {
   }, [navigation, subarea_id]);
 
   const handleNavigateToProcedures = useCallback(
-    (procedure_image_url: string, observations: string) => {
+    (procedure_image_url: string, observations: string, index: number) => {
       navigation.navigate('ShowProcedure', {
         procedure_image_url,
         observations,
+        subarea_id,
+        index,
       });
     },
-    [navigation],
+    [navigation, subarea_id],
   );
 
   return (
     <>
-      <SafeAreaView>
-        <ProcedureList
-          data={procedures}
-          keyExtractor={procedure => procedure.id}
-          // eslint-disable-next-line prettier/prettier
-          renderItem={({ item: procedure }) => (
-            <ProcedureContainer
-              onPress={
-                () =>
-                  handleNavigateToProcedures(
-                    procedure.procedure_image_url,
-                    procedure.observations,
-                  )
-                // eslint-disable-next-line react/jsx-curly-newline
-              }
-            >
-              <ProcedureIndexView fontColor={procedure.font}>
-                <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
-              </ProcedureIndexView>
-              <ProcedureDetails>
-                <ProcedureDetail>{procedure.tag}</ProcedureDetail>
-                <ProcedureDetail>{procedure.description}</ProcedureDetail>
-                <ProcedureDetail>{procedure.local}</ProcedureDetail>
-                <ProcedureDetail>{procedure.font}</ProcedureDetail>
-                <ProcedureDetail>{procedure.observations}</ProcedureDetail>
-              </ProcedureDetails>
-            </ProcedureContainer>
-          )}
-        />
-      </SafeAreaView>
+      <Header title="Lista de procedimentos" />
+
+      <ProcedureList
+        data={procedures}
+        keyExtractor={procedure => procedure.id}
+        // eslint-disable-next-line prettier/prettier
+        renderItem={({ item: procedure }) => (
+          <ProcedureContainer
+            onPress={
+              () =>
+                handleNavigateToProcedures(
+                  procedure.procedure_image_url,
+                  procedure.observations,
+                  procedure.index,
+                )
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
+          >
+            <ProcedureIndexView fontColor={procedure.font}>
+              <ProcedureIndexText>{procedure.index}</ProcedureIndexText>
+            </ProcedureIndexView>
+            <ProcedureDetails>
+              <ProcedureDetail>{procedure.tag}</ProcedureDetail>
+              <ProcedureDetail>{procedure.description}</ProcedureDetail>
+              <ProcedureDetail>{procedure.local}</ProcedureDetail>
+              <ProcedureDetail>{procedure.font}</ProcedureDetail>
+              <ProcedureDetail>{procedure.observations}</ProcedureDetail>
+            </ProcedureDetails>
+          </ProcedureContainer>
+        )}
+      />
 
       <FabButton onPress={handleCreateProcedure}>
         <FabButtonText>

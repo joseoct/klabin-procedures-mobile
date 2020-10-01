@@ -21,10 +21,16 @@ export const CameraButtonView = styled.View`
 `;
 
 export const CameraButton = styled(Button)`
-  width: 56px;
-  border-radius: 28px;
+  width: 100%;
+  border-radius: 8px;
 `;
 
 export const CreateButtonView = styled.View`
   margin-top: 36px;
+  align-items: center;
+`;
+
+export const CreateButton = styled(Button)`
+  width: 100px;
+  border-radius: 8px;
 `;

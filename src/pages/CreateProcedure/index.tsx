@@ -1,5 +1,6 @@
 import React, { useRef, useCallback, useState } from 'react';
 import {
+  View,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -12,8 +13,8 @@ import ImagePicker from 'react-native-image-picker';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
+import Header from '../../components/Header';
 import api from '../../services/api';
-import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import {
@@ -21,6 +22,7 @@ import {
   CameraButtonView,
   CameraButton,
   CreateButtonView,
+  CreateButton,
 } from './styles';
 
 interface RouteParams {
@@ -38,10 +40,10 @@ const CreateProcedure: React.FC = () => {
   const route = useRoute();
   const formRef = useRef<FormHandles>(null);
   const { subarea_id } = route.params as RouteParams;
-  const { reset } = useNavigation();
 
   const [font, setFont] = useState<string>('');
   const [uriPhoto, setUriPhoto] = useState<string>('');
+  const { reset } = useNavigation();
 
   const handleProcedurePhoto = useCallback(() => {
     ImagePicker.showImagePicker(
@@ -81,24 +83,32 @@ const CreateProcedure: React.FC = () => {
         uri: uriPhoto,
       });
 
-      api.post(`subareas/${subarea_id}`, formData).then(() => {
-        Alert.alert('Procedimento criado com sucesso');
-        reset({
-          routes: [
-            {
-              name: 'Procedures',
-              params: { subarea_id },
-            },
-          ],
-          index: 0,
+      try {
+        api.post(`subareas/${subarea_id}`, formData).then(() => {
+          Alert.alert('Procedimento criado com sucesso');
+          reset({
+            index: 2,
+            routes: [
+              {
+                name: 'Procedures',
+                params: {
+                  subarea_id,
+                },
+              },
+            ],
+          });
         });
-      });
+      } catch (error) {
+        Alert.alert('Falha ao cadastrar procedimento');
+      }
     },
-    [subarea_id, font, uriPhoto, reset],
+    [subarea_id, font, uriPhoto],
   );
 
   return (
     <>
+      <Header title="Criar procedimento" />
+
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -110,11 +120,64 @@ const CreateProcedure: React.FC = () => {
         >
           <Container>
             <Form onSubmit={handleCreateProcedure} ref={formRef}>
-              <Input
-                name="tag"
-                placeholder="Tag"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
+              <View style={{ marginBottom: 8 }}>
+                <DropDownPicker
+                  items={[
+                    {
+                      label: 'Massa',
+                      value: 'Massa',
+                    },
+                    {
+                      label: 'Química',
+                      value: 'Química',
+                    },
+                    {
+                      label: 'Pneumática',
+                      value: 'Pneumática',
+                    },
+                    {
+                      label: 'Elétrica',
+                      value: 'Elétrica',
+                    },
+                    {
+                      label: 'Água',
+                      value: 'Água',
+                    },
+                    {
+                      label: 'Mecânica',
+                      value: 'Mecânica',
+                    },
+                  ]}
+                  defaultValue={font}
+                  arrowColor="#f4f4f4"
+                  containerStyle={{ height: 60 }}
+                  style={{
+                    backgroundColor: '#22222b',
+                    borderColor: '#22222b',
+                    borderTopLeftRadius: 10,
+                    borderTopRightRadius: 10,
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10,
+                  }}
+                  dropDownStyle={{
+                    backgroundColor: '#322e38',
+                    borderColor: '#009e59',
+                  }}
+                  placeholder="Fonte"
+                  placeholderStyle={{ color: '#666360' }}
+                  labelStyle={{
+                    fontFamily: 'RobotoSlab-Regular',
+                    padding: 19,
+                    marginLeft: 8,
+                    fontSize: 16,
+                    textAlign: 'left',
+                    color: '#f4f4f4',
+                  }}
+                  onChangeItem={item => setFont(item.value)}
+                />
+              </View>
+
+              <Input name="tag" placeholder="Tag" returnKeyType="next" />
 
               <Input
                 autoCorrect={false}
@@ -123,78 +186,27 @@ const CreateProcedure: React.FC = () => {
                 returnKeyType="next"
               />
 
-              <Input
-                name="local"
-                placeholder="Local"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
+              <Input name="local" placeholder="Local" returnKeyType="next" />
 
               <Input
                 name="observations"
                 placeholder="Observações"
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
-
-              <DropDownPicker
-                items={[
-                  {
-                    label: 'Massa',
-                    value: 'Massa',
-                  },
-                  {
-                    label: 'Química',
-                    value: 'Química',
-                  },
-                  {
-                    label: 'Pneumática',
-                    value: 'Pneumática',
-                  },
-                  {
-                    label: 'Elétrica',
-                    value: 'Elétrica',
-                  },
-                  {
-                    label: 'Água',
-                    value: 'Água',
-                  },
-                  {
-                    label: 'Mecânica',
-                    value: 'Mecânica',
-                  },
-                ]}
-                defaultValue={font}
-                arrowColor="#f4f4f4"
-                containerStyle={{ height: 60, border: 'none' }}
-                style={{
-                  backgroundColor: '#22222b',
-                  borderTopLeftRadius: 10,
-                  borderTopRightRadius: 10,
-                  borderBottomLeftRadius: 10,
-                  borderBottomRightRadius: 10,
-                }}
-                dropDownStyle={{ backgroundColor: '#22222b' }}
-                placeholder="Fonte"
-                placeholderStyle={{ color: '#666360' }}
-                labelStyle={{
-                  fontFamily: 'RobotoSlab-Regular',
-                  padding: 19,
-                  marginLeft: 8,
-                  fontSize: 16,
-                  textAlign: 'left',
-                  color: '#f4f4f4',
-                }}
-                onChangeItem={item => setFont(item.value)}
+                returnKeyType="next"
               />
 
               <CameraButtonView>
-                <CameraButton onPress={handleProcedurePhoto} icon="camera" />
+                <CameraButton onPress={handleProcedurePhoto} icon="camera">
+                  Tirar/Escolher foto
+                </CameraButton>
               </CameraButtonView>
 
               <CreateButtonView>
-                <Button onPress={() => formRef.current?.submitForm()}>
-                  Criar procedimento
-                </Button>
+                <CreateButton
+                  icon="plus"
+                  onPress={() => formRef.current?.submitForm()}
+                >
+                  Criar
+                </CreateButton>
               </CreateButtonView>
             </Form>
           </Container>
