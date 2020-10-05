@@ -1,9 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { SafeAreaView } from 'react-native';
-import { useAxios } from '../../hooks/useAxios';
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 
@@ -36,20 +35,23 @@ export interface Procedure {
 const Procedures: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const [procedures, setProcedures] = useState<Procedure[]>([]);
 
   const { subarea_id } = route.params as RouteParams;
 
-  const { data: procedures } = useAxios<Procedure[]>(
-    `subareas/${subarea_id}/procedures`,
-  );
+  useEffect(() => {
+    api
+      .get(`subareas/${subarea_id}/procedures`)
+      .then(response => setProcedures(response.data));
+  }, [subarea_id]);
 
-  const handleCreateProcedure = useCallback(() => {
+  const handleNavigateCreateProcedure = useCallback(() => {
     navigation.navigate('CreateProcedure', {
       subarea_id,
     });
   }, [navigation, subarea_id]);
 
-  const handleNavigateToProcedures = useCallback(
+  const handleNavigateToProcedure = useCallback(
     (procedure_image_url: string, observations: string, index: number) => {
       navigation.navigate('ShowProcedure', {
         procedure_image_url,
@@ -73,7 +75,7 @@ const Procedures: React.FC = () => {
           <ProcedureContainer
             onPress={
               () =>
-                handleNavigateToProcedures(
+                handleNavigateToProcedure(
                   procedure.procedure_image_url,
                   procedure.observations,
                   procedure.index,
@@ -95,7 +97,7 @@ const Procedures: React.FC = () => {
         )}
       />
 
-      <FabButton onPress={handleCreateProcedure}>
+      <FabButton onPress={handleNavigateCreateProcedure}>
         <FabButtonText>
           <Icon name="plus" size={30} color="#fff" />
         </FabButtonText>

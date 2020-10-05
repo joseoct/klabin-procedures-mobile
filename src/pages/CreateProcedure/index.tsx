@@ -43,7 +43,7 @@ const CreateProcedure: React.FC = () => {
 
   const [font, setFont] = useState<string>('');
   const [uriPhoto, setUriPhoto] = useState<string>('');
-  const { reset } = useNavigation();
+  const navigation = useNavigation();
 
   const handleProcedurePhoto = useCallback(() => {
     ImagePicker.showImagePicker(
@@ -86,23 +86,13 @@ const CreateProcedure: React.FC = () => {
       try {
         api.post(`subareas/${subarea_id}`, formData).then(() => {
           Alert.alert('Procedimento criado com sucesso');
-          reset({
-            index: 2,
-            routes: [
-              {
-                name: 'Procedures',
-                params: {
-                  subarea_id,
-                },
-              },
-            ],
-          });
+          navigation.goBack();
         });
       } catch (error) {
         Alert.alert('Falha ao cadastrar procedimento');
       }
     },
-    [subarea_id, font, uriPhoto],
+    [subarea_id, font, uriPhoto, navigation],
   );
 
   return (

@@ -88,6 +88,7 @@ const Subareas: React.FC = () => {
               <TagView>
                 <TagText>Tag</TagText>
                 <RadioButton
+                  color="#009e59"
                   value="tag"
                   status={searchFor === 'tag' ? 'checked' : 'unchecked'}
                   onPress={() => setSearchFor('tag')}

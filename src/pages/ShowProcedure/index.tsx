@@ -31,25 +31,19 @@ const ShowProcedure: React.FC = () => {
     index,
   } = route.params as RouteParams;
 
-  const { reset } = useNavigation();
+  const navigation = useNavigation();
 
   const handleDeleteProcedure = useCallback(() => {
     try {
       api.delete(`subareas/${subarea_id}/${index}`);
+
+      navigation.goBack();
+
       Alert.alert('Procedimento deletado com sucesso');
-      reset({
-        routes: [
-          {
-            name: 'Procedures',
-            params: { subarea_id },
-          },
-        ],
-        index: 2,
-      });
     } catch (err) {
       Alert.alert('Falha ao deletar procedimento');
     }
-  }, [index, subarea_id, reset]);
+  }, [index, navigation, subarea_id]);
 
   return (
     <>
