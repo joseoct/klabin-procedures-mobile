@@ -35,15 +35,22 @@ const ShowProcedure: React.FC = () => {
 
   const handleDeleteProcedure = useCallback(() => {
     try {
-      api.delete(`subareas/${subarea_id}/${index}`);
+      api.delete(`subareas/${subarea_id}/${index}`).then(() => {
+        Alert.alert('Procedimento deletado com sucesso');
 
-      navigation.goBack();
-
-      Alert.alert('Procedimento deletado com sucesso');
+        navigation.navigate('Procedures');
+      });
     } catch (err) {
       Alert.alert('Falha ao deletar procedimento');
     }
   }, [index, navigation, subarea_id]);
+
+  const handleNavigateToEdit = useCallback(() => {
+    navigation.navigate('EditProcedure', {
+      subarea_id,
+      index,
+    });
+  }, [navigation, index, subarea_id]);
 
   return (
     <>
@@ -55,7 +62,9 @@ const ShowProcedure: React.FC = () => {
         <ProcedureImage source={{ uri: procedure_image_url }} />
 
         <ButtonsView>
-          <EditButton icon="edit">Editar</EditButton>
+          <EditButton icon="edit" onPress={handleNavigateToEdit}>
+            Editar
+          </EditButton>
           <RemoveButton icon="trash-2" onPress={handleDeleteProcedure}>
             Excluir
           </RemoveButton>

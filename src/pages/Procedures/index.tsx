@@ -1,5 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import {
+  useRoute,
+  useNavigation,
+  useIsFocused,
+} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import api from '../../services/api';
@@ -40,10 +44,12 @@ const Procedures: React.FC = () => {
   const { subarea_id } = route.params as RouteParams;
 
   useEffect(() => {
-    api
-      .get(`subareas/${subarea_id}/procedures`)
-      .then(response => setProcedures(response.data));
-  }, [subarea_id]);
+    navigation.addListener('focus', () => {
+      api.get(`subareas/${subarea_id}/procedures`).then(response => {
+        setProcedures(response.data);
+      });
+    });
+  }, [subarea_id, navigation]);
 
   const handleNavigateCreateProcedure = useCallback(() => {
     navigation.navigate('CreateProcedure', {

@@ -6,6 +6,7 @@ import Subareas from '../pages/Subareas';
 import Procedures from '../pages/Procedures';
 import CreateProcedure from '../pages/CreateProcedure';
 import ShowProcedure from '../pages/ShowProcedure';
+import EditProcedure from '../pages/EditProcedure';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,14 @@ const Routes: React.FC = () => {
       <Stack.Screen
         name="ShowProcedure"
         component={ShowProcedure}
+        options={{
+          headerShown: false,
+          cardStyle: { backgroundColor: '#312e38' },
+        }}
+      />
+      <Stack.Screen
+        name="EditProcedure"
+        component={EditProcedure}
         options={{
           headerShown: false,
           cardStyle: { backgroundColor: '#312e38' },
